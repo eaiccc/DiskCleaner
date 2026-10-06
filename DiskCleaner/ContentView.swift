@@ -55,9 +55,14 @@ struct ContentView: View {
                     // Scan button
                     if store.isScanning {
                         Button {
-                            store.cancelScan()
+                            withAnimation {
+                                store.cancelScan()
+                            }
                         } label: {
                             HStack(spacing: 6) {
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 6, height: 6)
                                 ProgressView()
                                     .controlSize(.small)
                                 Text("停止掃描")
@@ -65,7 +70,9 @@ struct ContentView: View {
                         }
                     } else {
                         Button {
-                            store.startScan()
+                            withAnimation {
+                                store.startScan()
+                            }
                         } label: {
                             Label("全碟掃描", systemImage: "arrow.clockwise")
                         }
@@ -116,6 +123,11 @@ struct ContentView: View {
                     LargeFilesView()
                 case .history:
                     HistoryView()
+                }
+
+                // Global live scan status when viewing other detail views
+                if store.isScanning && selectedSection != .overview {
+                    MiniScanStatusBar()
                 }
 
                 // Persistent Bottom Basket Bar

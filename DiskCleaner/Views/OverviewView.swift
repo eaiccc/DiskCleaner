@@ -11,6 +11,9 @@ struct OverviewView: View {
     @Bindable var store = AppStore.shared
     let onNavigate: (SidebarSection) -> Void
 
+    @State private var isGaugeScanning = false
+    @State private var isGaugePulse = false
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -39,6 +42,11 @@ struct OverviewView: View {
                     .padding(.horizontal, 24)
                 }
 
+                // Live Scanning Animation Card
+                if store.isScanning {
+                    DiskScanningCardView()
+                }
+
                 // Storage Capacity Card
                 storageCard
 
@@ -46,6 +54,14 @@ struct OverviewView: View {
                 categoryGrid
             }
             .padding(.vertical, 24)
+        }
+        .onAppear {
+            withAnimation(.linear(duration: 2.2).repeatForever(autoreverses: false)) {
+                isGaugeScanning = true
+            }
+            withAnimation(.easeOut(duration: 1.6).repeatForever(autoreverses: false)) {
+                isGaugePulse = true
+            }
         }
     }
 
@@ -60,6 +76,31 @@ struct OverviewView: View {
             HStack(alignment: .center, spacing: 24) {
                 // Circular Gauge
                 ZStack {
+                    // Scanning outer aura ring
+                    if store.isScanning {
+                        Circle()
+                            .stroke(
+                                AngularGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: .clear, location: 0.0),
+                                        .init(color: .cyan.opacity(0.2), location: 0.5),
+                                        .init(color: .cyan, location: 1.0)
+                                    ]),
+                                    center: .center
+                                ),
+                                style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                            )
+                            .frame(width: 132, height: 132)
+                            .rotationEffect(.degrees(isGaugeScanning ? 360 : 0))
+                            .shadow(color: .cyan.opacity(0.6), radius: 6)
+
+                        Circle()
+                            .stroke(Color.cyan.opacity(0.3), lineWidth: 1.2)
+                            .frame(width: 140, height: 140)
+                            .scaleEffect(isGaugePulse ? 1.08 : 0.94)
+                            .opacity(isGaugePulse ? 0 : 0.7)
+                    }
+
                     Circle()
                         .stroke(Color.secondary.opacity(0.15), lineWidth: 14)
                         .frame(width: 110, height: 110)
@@ -76,9 +117,20 @@ struct OverviewView: View {
                     VStack(spacing: 2) {
                         Text("\(Int(disk.usageRatio * 100))%")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                        Text("已使用")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        if store.isScanning {
+                            HStack(spacing: 3) {
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 5, height: 5)
+                                Text("掃描中")
+                                    .font(.system(size: 10, weight: .semibold))
+                                    .foregroundColor(.cyan)
+                            }
+                        } else {
+                            Text("已使用")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 

@@ -115,12 +115,16 @@ struct CandidateListView: View {
             Divider()
 
             if items.isEmpty {
-                VStack(spacing: 12) {
+                VStack(spacing: 16) {
                     if store.isScanning {
-                        ProgressView()
-                            .controlSize(.large)
-                        Text("正在掃描 \(title)...")
-                            .foregroundColor(.secondary)
+                        DiskRadarScannerView(size: 64, showHeadArm: true)
+                        VStack(spacing: 4) {
+                            Text("正在掃描 \(title)...")
+                                .font(.headline)
+                            Text("正在比對快取規則並統計可回收空間")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     } else {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 48))

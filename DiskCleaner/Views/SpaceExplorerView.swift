@@ -54,19 +54,10 @@ struct SpaceExplorerView: View {
                     .frame(minWidth: 300)
                 }
             } else if store.isTreeScanning {
-                VStack(spacing: 16) {
-                    ProgressView()
-                        .controlSize(.large)
-                    Text("正在掃描檔案結構...")
-                        .font(.headline)
-                    Text(store.currentPath)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                        .frame(maxWidth: 400)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                DiskScanningFullView(
+                    title: "正在深度掃描全碟檔案結構",
+                    subtitle: "正在即時統計目錄大小、追蹤檔案關聯並構建視覺化地圖..."
+                )
             } else {
                 VStack(spacing: 16) {
                     Image(systemName: "internaldrive.fill")
