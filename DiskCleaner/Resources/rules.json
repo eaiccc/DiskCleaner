@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "xcode.derivedData",
+      "name": "DerivedData（建置快取）",
+      "category": "xcode",
+      "safety": "safe",
+      "paths": ["~/Library/Developer/Xcode/DerivedData/*"],
+      "runningApps": ["com.apple.dt.Xcode"],
+      "nameStyle": "derivedData",
+      "note": "Xcode 下次建置時會自動重建"
+    },
+    {
+      "id": "xcode.previews",
+      "name": "SwiftUI Previews 快取",
+      "category": "xcode",
+      "safety": "safe",
+      "paths": ["~/Library/Developer/Xcode/UserData/Previews/*"],
+      "runningApps": ["com.apple.dt.Xcode"]
+    },
+    {
+      "id": "xcode.products",
+      "name": "Products（Run 產物）",
+      "category": "xcode",
+      "safety": "safe",
+      "paths": ["~/Library/Developer/Xcode/Products/*"]
+    },
+    {
+      "id": "xcode.caches",
+      "name": "Xcode 快取與文件索引",
+      "category": "xcode",
+      "safety": "safe",
+      "paths": [
+        "~/Library/Caches/com.apple.dt.Xcode",
+        "~/Library/Caches/com.apple.dt.Xcode.sourcecontrol.Git",
+        "~/Library/Developer/Xcode/DocumentationCache",
+        "~/Library/Developer/Xcode/DocumentationIndex"
+      ],
+      "runningApps": ["com.apple.dt.Xcode"]
+    },
+    {
+      "id": "xcode.deviceSupport",
+      "name": "裝置支援檔（DeviceSupport）",
+      "category": "xcode",
+      "safety": "caution",
+      "paths": ["~/Library/Developer/Xcode/{iOS,watchOS,tvOS,visionOS,xrOS,macOS} DeviceSupport/*"],
+      "note": "連接對應版本的實機時會重新產生（需數分鐘）"
+    },
+    {
+      "id": "xcode.archives",
+      "name": "Archives（封存檔）",
+      "category": "xcode",
+      "safety": "review",
+      "paths": ["~/Library/Developer/Xcode/Archives/*/*.xcarchive"],
+      "nameStyle": "archive",
+      "note": "含 dSYM，刪除後無法符號化該版本的當機報告"
+    },
+    {
+      "id": "simulator.device.classify",
+      "name": "模擬器裝置",
+      "category": "simulator",
+      "safety": "caution",
+      "paths": ["~/Library/Developer/CoreSimulator/Devices/*"],
+      "classifyOnly": true
+    },
+    {
+      "id": "simulator.caches",
+      "name": "模擬器快取",
+      "category": "simulator",
+      "safety": "safe",
+      "paths": ["~/Library/Developer/CoreSimulator/Caches/*"],
+      "runningApps": ["com.apple.iphonesimulator"]
+    },
+    {
+      "id": "simulator.xctestDevices",
+      "name": "平行測試複製裝置（XCTestDevices）",
+      "category": "simulator",
+      "safety": "safe",
+      "paths": ["~/Library/Developer/XCTestDevices/*"],
+      "runningApps": ["com.apple.dt.Xcode"],
+      "note": "Parallel Testing 產生的模擬器複本，測試時會自動重建"
+    },
+    {
+      "id": "simulator.logs",
+      "name": "模擬器 Log",
+      "category": "simulator",
+      "safety": "safe",
+      "paths": ["~/Library/Logs/CoreSimulator/*"]
+    },
+    {
+      "id": "packages.spm",
+      "name": "Swift Package Manager 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/org.swift.swiftpm"]
+    },
+    {
+      "id": "packages.cocoapods",
+      "name": "CocoaPods 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/CocoaPods"]
+    },
+    {
+      "id": "packages.carthage",
+      "name": "Carthage 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/org.carthage.CarthageKit"]
+    },
+    {
+      "id": "packages.npm",
+      "name": "npm / Yarn / Bun 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/.npm/_cacache", "~/Library/Caches/Yarn", "~/.bun/install/cache"]
+    },
+    {
+      "id": "packages.pnpm",
+      "name": "pnpm Store",
+      "category": "packages",
+      "safety": "caution",
+      "paths": ["~/Library/pnpm/store"],
+      "note": "專案需重新 pnpm install"
+    },
+    {
+      "id": "packages.gradle",
+      "name": "Gradle 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/.gradle/caches"]
+    },
+    {
+      "id": "packages.homebrew",
+      "name": "Homebrew 下載快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/Homebrew"]
+    },
+    {
+      "id": "packages.go",
+      "name": "Go / Cargo 快取",
+      "category": "packages",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/go-build", "~/.cargo/registry/cache"]
+    },
+    {
+      "id": "ai.huggingface",
+      "name": "Hugging Face 模型",
+      "category": "ai",
+      "safety": "caution",
+      "paths": ["~/.cache/huggingface/hub/models--*", "~/.cache/huggingface/hub/datasets--*"],
+      "nameStyle": "huggingface",
+      "note": "刪除後需重新下載模型"
+    },
+    {
+      "id": "ai.ollama",
+      "name": "Ollama 模型",
+      "category": "ai",
+      "safety": "caution",
+      "paths": ["~/.ollama/models"],
+      "note": "也可用 ollama rm 個別移除；刪除後需重新 pull"
+    },
+    {
+      "id": "ai.lmstudio",
+      "name": "LM Studio 模型",
+      "category": "ai",
+      "safety": "caution",
+      "paths": ["~/.lmstudio/models/*/*", "~/.cache/lm-studio/models/*/*"],
+      "nameStyle": "parentAndLast",
+      "note": "刪除後需重新下載模型"
+    },
+    {
+      "id": "ai.torch",
+      "name": "PyTorch Hub 快取",
+      "category": "ai",
+      "safety": "caution",
+      "paths": ["~/.cache/torch"]
+    },
+    {
+      "id": "ai.pip",
+      "name": "pip / uv 快取",
+      "category": "ai",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/pip", "~/.cache/pip", "~/.cache/uv", "~/Library/Caches/uv"]
+    },
+    {
+      "id": "ai.conda",
+      "name": "Conda 套件快取",
+      "category": "ai",
+      "safety": "caution",
+      "paths": ["~/{miniconda3,anaconda3,miniforge3,mambaforge}/pkgs", "/opt/homebrew/Caskroom/miniconda/base/pkgs"],
+      "note": "建議改用 conda clean --all"
+    },
+    {
+      "id": "ai.editors",
+      "name": "AI 編輯器快取（Cursor / VS Code / Windsurf / Antigravity）",
+      "category": "ai",
+      "safety": "safe",
+      "paths": ["~/Library/Application Support/{Cursor,Code,Code - Insiders,Windsurf,Antigravity,Kiro,Trae}/{Cache,CachedData,CachedExtensionVSIXs,Code Cache,GPUCache,DawnGraphiteCache,DawnWebGPUCache,logs}"],
+      "runningApps": ["com.todesktop.230313mzl4w4u92", "com.microsoft.VSCode", "com.microsoft.VSCodeInsiders", "com.exafunction.windsurf"],
+      "nameStyle": "parentAndLast",
+      "note": "編輯器重新啟動時會自動重建"
+    },
+    {
+      "id": "ai.desktopApps",
+      "name": "AI 桌面 App 快取（Claude / ChatGPT / Perplexity）",
+      "category": "ai",
+      "safety": "safe",
+      "paths": [
+        "~/Library/Application Support/{Claude,ChatGPT,Perplexity}/{Cache,Code Cache,GPUCache,DawnGraphiteCache,DawnWebGPUCache,logs}",
+        "~/Library/Caches/{com.openai.chat,com.anthropic.claudefordesktop,ai.perplexity.mac}"
+      ],
+      "runningApps": ["com.anthropic.claudefordesktop", "com.openai.chat"],
+      "nameStyle": "parentAndLast"
+    },
+    {
+      "id": "temp.tmpdir",
+      "name": "使用者暫存檔（$TMPDIR，超過 3 天）",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["$TMPDIR/*"],
+      "minAgeDays": 3
+    },
+    {
+      "id": "temp.tmp",
+      "name": "系統暫存 /tmp（超過 3 天）",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["/private/tmp/*"],
+      "minAgeDays": 3,
+      "note": "屬於其他使用者的檔案可能無法刪除"
+    },
+    {
+      "id": "logs.diagnostic",
+      "name": "當機與診斷報告",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["~/Library/Logs/DiagnosticReports"]
+    },
+    {
+      "id": "logs.user",
+      "name": "App Log（~/Library/Logs）",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["~/Library/Logs/*"]
+    },
+    {
+      "id": "logs.system",
+      "name": "系統 Log（/Library/Logs）",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["/Library/Logs/*"],
+      "note": "部分檔案屬於 root，可能無法刪除"
+    },
+    {
+      "id": "backups.ios",
+      "name": "iOS 裝置備份",
+      "category": "backups",
+      "safety": "review",
+      "paths": ["~/Library/Application Support/MobileSync/Backup/*"],
+      "nameStyle": "iosBackup",
+      "note": "刪除後就不能用這份備份還原裝置"
+    },
+    {
+      "id": "caches.user",
+      "name": "App 快取（~/Library/Caches）",
+      "category": "tempLogs",
+      "safety": "safe",
+      "paths": ["~/Library/Caches/*"],
+      "note": "App 會自動重建；執行中的 App 建議先關閉"
+    }
+  ]
+}
